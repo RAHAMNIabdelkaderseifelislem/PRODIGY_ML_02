@@ -1,3 +1,20 @@
+"""
+Utility script for customer segmentation analysis.
+
+This script provides a Streamlit-based interface for performing customer
+segmentation analysis. It includes functions for loading and preprocessing data,
+training a K-means clustering model, predicting segments for new customers, and
+visualizing results.
+
+The script is organized into three main sections: data analysis, model training,
+and prediction. The data analysis section loads and preprocesses the data,
+computes summary statistics, and creates visualizations. The model training
+section trains a K-means clustering model on the preprocessed data and saves the
+model to a file. The prediction section loads the trained model, prepares input
+data for prediction, and displays the predicted segment.
+
+"""
+
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -10,6 +27,12 @@ import os
 os.makedirs('model', exist_ok=True)
 
 def main():
+    """
+    Main entry point for the script.
+
+    This function sets up the Streamlit interface, loads and preprocesses the data,
+    trains a K-means clustering model, and predicts segments for new customers.
+    """
     st.set_page_config(page_title="Customer Segmentation", layout="wide")
     
     st.title("🛍️ Customer Segmentation Analysis")
@@ -39,6 +62,12 @@ def main():
         show_prediction(preprocessor, segmentation)
 
 def show_data_analysis(preprocessor):
+    """
+    Displays data analysis results.
+
+    This function loads and preprocesses the data, computes summary statistics,
+    and creates visualizations.
+    """
     st.header("📊 Data Analysis")
     
     try:
@@ -67,6 +96,12 @@ def show_data_analysis(preprocessor):
         st.error(f"Error in data analysis: {str(e)}")
 
 def show_model_training(preprocessor, segmentation):
+    """
+    Displays model training results.
+
+    This function loads and preprocesses the data, trains a K-means clustering
+    model, and saves the model to a file.
+    """
     st.header("🔄 Model Training")
     
     try:
@@ -121,6 +156,12 @@ def show_model_training(preprocessor, segmentation):
         st.error(f"Error in model training: {str(e)}")
 
 def show_prediction(preprocessor, segmentation):
+    """
+    Displays prediction results.
+
+    This function prepares input data for prediction, predicts the segment for
+    the input data, and displays the predicted segment.
+    """
     st.header("🎯 Predict Customer Segment")
     
     try:
@@ -176,7 +217,6 @@ def show_prediction(preprocessor, segmentation):
             
             st.write("### 💡 Marketing Recommendation:")
             st.success(recommendations.get(segment, "No specific recommendation available."))
-            
     except Exception as e:
         st.error(f"Error in prediction: {str(e)}")
 
